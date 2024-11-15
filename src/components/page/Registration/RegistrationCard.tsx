@@ -90,7 +90,7 @@ export const RegistrationCard = ({
             render={({ field }) => (
               <SelectRoot
                 name={field.name}
-                value={[field.value]}
+                value={field.value}
                 onValueChange={({ value }) => field.onChange(value)}
                 onInteractOutside={() => field.onBlur()}
                 collection={skills}
