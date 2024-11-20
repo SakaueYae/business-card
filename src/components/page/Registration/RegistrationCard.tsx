@@ -3,16 +3,18 @@ import {
   Card,
   createListCollection,
   Input,
-  SelectContent,
-  SelectItem,
-  SelectRoot,
-  SelectTrigger,
-  SelectValueText,
   Textarea,
 } from "@chakra-ui/react";
 import { Field } from "../../ui/field";
 import { Controller, useForm } from "react-hook-form";
 import { RegistrationForm } from "./Type";
+import {
+  SelectContent,
+  SelectItem,
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+} from "../../ui/select";
 
 type RegistrationCardProps = {
   skillsList: { id: string; label: string }[];
