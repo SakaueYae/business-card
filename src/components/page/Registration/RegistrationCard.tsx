@@ -15,14 +15,17 @@ import {
   SelectTrigger,
   SelectValueText,
 } from "../../ui/select";
+import { Alert } from "../../ui/alert";
 
 type RegistrationCardProps = {
-  skillsList: { id: string; label: string }[];
+  skillsList: { id: number; label: string }[];
+  isError: boolean;
   onSave: (value: RegistrationForm) => void;
 };
 
 export const RegistrationCard = ({
   skillsList,
+  isError,
   onSave,
 }: RegistrationCardProps) => {
   const {
@@ -133,6 +136,7 @@ export const RegistrationCard = ({
           新規登録
         </Button>
       </Card.Footer>
+      {isError && <Alert status="error">登録時にエラーが発生しました。</Alert>}
     </Card.Root>
   );
 };
