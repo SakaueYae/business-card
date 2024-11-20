@@ -17,6 +17,7 @@ export const Registration = () => {
         setError(true);
         return;
       }
+      setError(true);
       navigate("/");
     } catch {
       setError(true);

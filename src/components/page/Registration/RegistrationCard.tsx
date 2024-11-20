@@ -126,7 +126,7 @@ export const RegistrationCard = ({
           <Input placeholder="X ID" {...register("x_id")} />
         </Field>
       </Card.Body>
-      <Card.Footer justifyContent="center">
+      <Card.Footer justifyContent="center" flexDir="column">
         <Button
           variant="solid"
           colorPalette="teal"
@@ -135,8 +135,10 @@ export const RegistrationCard = ({
         >
           新規登録
         </Button>
+        {isError && (
+          <Alert status="error">登録時にエラーが発生しました。</Alert>
+        )}
       </Card.Footer>
-      {isError && <Alert status="error">登録時にエラーが発生しました。</Alert>}
     </Card.Root>
   );
 };
