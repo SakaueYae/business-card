@@ -10,7 +10,7 @@ type UserCardProps = {
 
 export const UserCard = ({ data }: UserCardProps) => {
   return (
-    <Card.Root w="lg">
+    <Card.Root w={{ base: "100%", md: "lg" }} boxSizing="border-box">
       <Card.Header>
         <Card.Title>{data.name}</Card.Title>
       </Card.Header>

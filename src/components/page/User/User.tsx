@@ -1,6 +1,6 @@
-import { Box, Spinner, VStack, Text } from "@chakra-ui/react";
+import { Box, Spinner, VStack, Text, Button } from "@chakra-ui/react";
 import { UserCard } from "./UserCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUser } from "./models/getUser";
 import { RegistrationForm } from "../Registration/Type";
@@ -17,6 +17,7 @@ export const User = () => {
       }
     })();
   }, [params.id]);
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -26,9 +27,21 @@ export const User = () => {
       alignItems="center"
       backgroundColor="teal.50"
       minH="100vh"
+      p="10"
     >
       {data ? (
-        <UserCard data={data} />
+        <>
+          <UserCard data={data} />
+          <Button
+            w={{ base: "100%", md: "lg" }}
+            boxSizing="border-box"
+            mt="5"
+            colorPalette="teal"
+            onClick={() => navigate("/")}
+          >
+            戻る
+          </Button>
+        </>
       ) : (
         <VStack colorPalette="teal">
           <Spinner color="colorPalette.600" size="xl" />
