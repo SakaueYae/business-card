@@ -39,7 +39,7 @@ export const RegistrationCard = ({
   });
 
   return (
-    <Card.Root w="md">
+    <Card.Root w={{ base: "100%", md: "md" }} boxSizing="border-box">
       <Card.Body gap="4">
         <Field
           label="ID"
