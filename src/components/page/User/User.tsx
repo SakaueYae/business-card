@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner, VStack, Text } from "@chakra-ui/react";
 import { UserCard } from "./UserCard";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -27,7 +27,14 @@ export const User = () => {
       backgroundColor="teal.50"
       minH="100vh"
     >
-      {data && <UserCard data={data} />}
+      {data ? (
+        <UserCard data={data} />
+      ) : (
+        <VStack colorPalette="teal">
+          <Spinner color="colorPalette.600" size="xl" />
+          <Text color="colorPalette.600">Loading...</Text>
+        </VStack>
+      )}
     </Box>
   );
 };
