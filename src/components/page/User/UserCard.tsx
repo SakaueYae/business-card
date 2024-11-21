@@ -21,7 +21,7 @@ export const UserCard = ({ data }: UserCardProps) => {
         </div>
         <div>
           <Heading mb="3">好きな技術</Heading>
-          <Box as="ul" listStyleType="circle">
+          <Box as="ul" listStyleType="none">
             {data.skill_id.map((value) => (
               <li>{value}</li>
             ))}
