@@ -1,21 +1,9 @@
-import {
-  Button,
-  Card,
-  createListCollection,
-  Input,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, Card, Input, Textarea } from "@chakra-ui/react";
 import { Field } from "../../ui/field";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { RegistrationForm } from "./Type";
-import {
-  SelectContent,
-  SelectItem,
-  SelectRoot,
-  SelectTrigger,
-  SelectValueText,
-} from "../../ui/select";
 import { Alert } from "../../ui/alert";
+import { NativeSelectField, NativeSelectRoot } from "../../ui/native-select";
 
 type RegistrationCardProps = {
   skillsList: { id: number; label: string }[];
@@ -30,13 +18,13 @@ export const RegistrationCard = ({
 }: RegistrationCardProps) => {
   const {
     formState: { errors },
-    control,
     register,
     handleSubmit,
   } = useForm<RegistrationForm>();
-  const skills = createListCollection({
-    items: skillsList.map(({ id, label }) => ({ label, value: id })),
-  });
+  const items = skillsList.map(({ id, label }) => ({
+    value: id.toString(),
+    label,
+  }));
 
   return (
     <Card.Root w={{ base: "100%", md: "md" }} boxSizing="border-box">
@@ -88,32 +76,15 @@ export const RegistrationCard = ({
           width="320px"
           required
         >
-          <Controller
-            control={control}
-            name="skill_id"
-            rules={{ required: "好きな技術を選択してください" }}
-            render={({ field }) => (
-              <SelectRoot
-                name={field.name}
-                value={field.value}
-                onValueChange={({ value }) => field.onChange(value)}
-                onInteractOutside={() => field.onBlur()}
-                collection={skills}
-                required
-              >
-                <SelectTrigger>
-                  <SelectValueText placeholder="技術" />
-                </SelectTrigger>
-                <SelectContent>
-                  {skills.items.map((skill) => (
-                    <SelectItem item={skill} key={skill.value}>
-                      {skill.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </SelectRoot>
-            )}
-          />
+          <NativeSelectRoot w="100%">
+            <NativeSelectField
+              {...register("skill_id", {
+                required: "好きな技術を選択してください",
+              })}
+              placeholder="技術"
+              items={items}
+            />
+          </NativeSelectRoot>
         </Field>
 
         <Field label="GitHub ID">

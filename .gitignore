@@ -26,4 +26,7 @@ dist-ssr
 # Firebase cache
 .firebase/
 
+# testing
+/coverage
+
 .env
