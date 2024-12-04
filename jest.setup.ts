@@ -4,7 +4,7 @@ require("dotenv").config();
 
 Object.defineProperty(global, "structuredClone", {
   writable: true,
-  value: (val: unknown) => JSON.parse(JSON.stringify(val)),
+  value: (val: unknown) => val && JSON.parse(JSON.stringify(val)),
 });
 
 Object.defineProperty(window, "matchMedia", {

@@ -22,8 +22,8 @@ export const UserCard = ({ data }: UserCardProps) => {
         <div>
           <Heading mb="3">好きな技術</Heading>
           <Box as="ul" listStyleType="none">
-            {data.skill_id.map((value) => (
-              <li>{value}</li>
+            {data.skill_id.map((value, i) => (
+              <li key={i}>{value}</li>
             ))}
           </Box>
         </div>
@@ -40,7 +40,7 @@ export const UserCard = ({ data }: UserCardProps) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithubSquare size={36} />
+              <FaGithubSquare size={36} data-testid="github-icon" />
             </Link>
             <p>{data.github_id}</p>
           </Box>
@@ -51,7 +51,7 @@ export const UserCard = ({ data }: UserCardProps) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <SiQiita size={36} />
+              <SiQiita size={36} data-testid="qiita-icon" />
             </Link>
             <p>{data.qiita_id}</p>
           </Box>
@@ -62,7 +62,7 @@ export const UserCard = ({ data }: UserCardProps) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaXTwitter size={36} />
+              <FaXTwitter size={36} data-testid="x-icon" />
             </Link>
             <p>{data.x_id}</p>
           </Box>
