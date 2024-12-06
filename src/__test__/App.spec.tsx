@@ -56,7 +56,7 @@ describe("User", () => {
 
   test("名前が表示されている", () => {
     waitFor(async () => {
-      const title = await screen.getByText("田中太郎");
+      const title = await screen.getByRole("heading", { name: "田中太郎" });
       expect(title).toBeDefined();
     });
   });
@@ -173,7 +173,6 @@ describe("Registration", () => {
       "TypeScript"
     );
     await user.click(screen.getByRole("button", { name: "新規登録" }));
-    screen.debug();
     expect(
       screen.queryByRole("alert", { name: "IDを入力してください" }) // getBy not equal queryBy
     ).toBeDefined();
@@ -191,7 +190,6 @@ describe("Registration", () => {
       "TypeScript"
     );
     await user.click(screen.getByRole("button", { name: "新規登録" }));
-    screen.debug();
     expect(
       screen.queryByRole("alert", { name: "名前を入力してください" })
     ).toBeDefined();
@@ -206,7 +204,6 @@ describe("Registration", () => {
       "TypeScript"
     );
     await user.click(screen.getByRole("button", { name: "新規登録" }));
-    screen.debug();
     expect(
       screen.queryByRole("alert", { name: "自己紹介を入力してください" })
     ).toBeDefined();
@@ -225,7 +222,6 @@ describe("Registration", () => {
       "TypeScript"
     );
     await user.click(screen.getByRole("button", { name: "新規登録" }));
-    screen.debug();
     expect(
       screen.getByRole("heading", { name: "デジタル名刺アプリ" })
     ).toBeDefined();
@@ -279,5 +275,37 @@ describe("Homeのテスト", () => {
     const user = userEvent.setup();
     await user.click(screen.getByText("新規登録はこちら")); // getByRole("link")はhrefがついているやつ
     expect(router.state.location.pathname).toEqual("/cards/register");
+  });
+});
+
+describe("Homeのテスト-App.ver", () => {
+  beforeEach(() => {
+    renderApp("/");
+  });
+
+  test("タイトルが表示されている", () => {
+    const title = screen.getByRole("heading");
+    expect(title).toBeDefined();
+  });
+
+  test("IDを入力してボタンを押すと/cards/:idに遷移する", async () => {
+    const user = userEvent.setup();
+    await user.type(screen.getByRole("textbox"), "sample_id");
+    await user.click(screen.getByRole("button"));
+    await waitFor(() => {
+      expect(screen.getByTestId("github-icon")).toBeDefined();
+    });
+  });
+
+  test("IDを入力しないでボタンを押すとエラーメッセージが表示される", async () => {
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button"));
+    expect(screen.getByText("IDを入力してください")).toBeDefined();
+  });
+
+  test("新規登録はこちらを押すと/cards/registerに遷移する", async () => {
+    const user = userEvent.setup();
+    await user.click(screen.getByText("新規登録はこちら")); // getByRole("link")はhrefがついているやつ
+    expect(screen.getByRole("heading", { name: "新規名刺登録" })).toBeDefined();
   });
 });
